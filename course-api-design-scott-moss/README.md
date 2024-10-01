@@ -27,3 +27,5 @@ belongsTo: User @relation(fields: [belongsToId], references: [id])
 ```
 
 Quando formatamos o arquivo (usando `npx prisma format` ou algum atalho no editor de código), o Prisma adiciona `Product Product[]` em `User`, para explicitar a relação que `User` tem com `Product`, na qual um usuário pode ter o campo `Product` e o tipo desse campo é uma lista (many!) de produtos.
+
+Alteramos de `Product` para `products` para ficar mais coerente com os outros itens da model `User`

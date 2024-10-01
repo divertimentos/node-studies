@@ -17,7 +17,7 @@ model User {
   id        String    @id @default(uuid())
   createdAt DateTime  @default(now())
   username  String    @unique
-  Product   Product[]
+  products  Product[]
 }
 
 model Product {
