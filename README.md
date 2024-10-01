@@ -1,4 +1,10 @@
-# APIs with Scott Moss
+# API design with NodeJS (by Scott Moss via Frontend Masters)
+
+## Useful links
+
+[Render](https://dashboard.render.com/)
+
+## Entendendo os schemas e as models
 
 Um produto pertence a um usuário. Qual é a relação? one-to-one? One-to-many? Many-to-many?
 
