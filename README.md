@@ -12,7 +12,7 @@ Então, no schema de `Product` é preciso ter um campo `belongsToId`, significan
 ```prisma
 
 model Product {
-  <!--...-->
+  // (...)
   belongsToId String
 }
 ```
@@ -22,7 +22,7 @@ Para setar a relação, usamos um campo `belongsTo` do tipo `User`, em vez de `S
 ```prisma
 
 model Product {
-  <!--...-->
+  // (...)
   belongsToId String
   belongsTo User @relation(fields: [belongsToId], references: [id])
 }
