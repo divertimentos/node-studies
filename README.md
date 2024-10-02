@@ -1,9 +1,5 @@
 # API design with NodeJS (by Scott Moss via Frontend Masters)
 
-## Useful links
-
-[Render](https://dashboard.render.com/)
-
 ## Entendendo os schemas e as models
 
 Um produto pertence a um usuário. Qual é a relação? one-to-one? One-to-many? Many-to-many?
@@ -38,8 +34,11 @@ Quando formatamos o arquivo (usando `npx prisma format` ou algum atalho no edito
 
 Alteramos de `Product` para `products` para ficar mais coerente com os outros itens da model `User`
 
+- Quando queremos limitar os caracteres de determinada string, usamos o decorador `@db.VarChar(255)`, sendo `255`o valor desejado.
+- É curioso tentar interconectar os conhecimentos, partindo do front-end, que consome APIs, chegando no back-end novamnete, onde são configuradas todas as relações entre as informações. Fico imaginando se cada campo de cada schema vai se tornar uma propriedade no JSON final, e se cada Schema será um endpoint com seu respectivo payload sendo montado a partir dos campos e o resultado das relações.
+
 ---
 
-Quando queremos limitar os caracteres de determinada string, usamos o decorador `@db.VarChar(255)`, sendo `255`o valor desejado.
+## Useful links
 
-
+- [Render](https://dashboard.render.com/)
