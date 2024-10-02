@@ -1,4 +1,4 @@
-# API design with NodeJS (by Scott Moss via Frontend Masters)
+# API design with NodeJS
 
 ## Entendendo os schemas e as models
 
