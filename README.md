@@ -1,5 +1,9 @@
 # API design with NodeJS
 
+## Useful links
+
+- [Render](https://dashboard.render.com/)
+
 ## Entendendo os schemas e as models
 
 Um produto pertence a um usuário. Qual é a relação? one-to-one? One-to-many? Many-to-many?
@@ -57,8 +61,12 @@ Migração é um conceito presente quando se fala de bancos de dados relacionais
 
 (Fonte: [Site do MongoDB](https://www.mongodb.com/resources/compare/relational-vs-non-relational-databases))
 
----
+### Migrando
 
-## Useful links
+Nós conversamos com o banco usando o `prisma/client`. Até agora, só usamos o CLI do Prisma, basicamente para formatar o código da schema.
 
-- [Render](https://dashboard.render.com/)
+O comando para migrar é `npx prisma migrate dev --name init`.
+
+## Rotas
+
+Diferentemente do que sempre ouvi de devs backend experientes, o CRUD é mais importante do que parece. Sempre ouvi pessoas fazendo troça de empresas que no anúncio da vaga esperam que você sabia ciência de foguete, para no dia a dia você fazer CRUD. Pelo que o Scott deu a entender, basicamente todo software com o qual interagimos é um CRUD. Então, se todo software é um CRUD, então nenhum é. O CRUD é apenas a premissa básica na qual o back-end se baseia.
