@@ -1,5 +1,20 @@
 # API design with NodeJS
 
+<!--toc:start-->
+
+- [API design with NodeJS](#api-design-with-nodejs)
+  - [Useful links](#useful-links)
+  - [Entendendo os schemas e as models](#entendendo-os-schemas-e-as-models)
+  - [Migrations](#migrations)
+    - [Relacional vs não relacional](#relacional-vs-não-relacional)
+      - [Bancos de dados relacionais](#bancos-de-dados-relacionais)
+      - [Bancos de dados não relacionais (NoSQL)](#bancos-de-dados-não-relacionais-nosql)
+    - [Migrando](#migrando)
+  - [Rotas](#rotas)
+    - [CRUDs](#cruds)
+  - [Middleware](#middleware)
+  <!--toc:end-->
+
 ## Useful links
 
 - [Render](https://dashboard.render.com/)
@@ -16,7 +31,6 @@ Um usuário pode ter muitos produtos, mas um produto não pode percenter a muito
 Então, no schema de `Product` é preciso ter um campo `belongsToId`, significando que um produto pertence a um único usuário, referenciado pelo `id` dele.
 
 ```prisma
-
 model Product {
   // (...)
   belongsToId String
@@ -26,7 +40,6 @@ model Product {
 Para setar a relação, usamos um campo `belongsTo` do tipo `User`, em vez de `String` (como acima feito anteriormente, no exemplo acima). Esse campo tem um atributo de relação. Nele setamos qual campo desse schema é responsável por guardar a relação. É o `belongsToId`. Em seguida, setamos qual campo em `User` guarda a referência do campo de `id` do User: `id`.
 
 ```prisma
-
 model Product {
   // (...)
   belongsToId String
