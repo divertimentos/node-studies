@@ -3,24 +3,35 @@ import { Router } from "express";
 const router = Router();
 
 /* Product  */
-router.get("/product", () => {}); // READ
-router.get("/product/:id", () => {}); // READ
-router.put("/product/:id", () => {}); // UPDATE
-router.post("/product", () => {}); // CREATE
-router.delete("/product/:id", () => {}); // DELETE
+
+// READ
+router.get("/product", (req, res) => {
+  res.json({ message: "I'm an updated product response!" });
+});
+
+router.get("/product/:id", () => {});
+
+// UPDATE
+router.put("/product/:id", () => {});
+
+// CREATE
+router.post("/product", () => {});
+
+// DELETE
+router.delete("/product/:id", () => {});
 
 /* Update  */
-router.get("/update", () => {}); // READ
-router.get("/update/:id", () => {}); // READ
-router.put("/update/:id", () => {}); // UPDATE
-router.post("/update", () => {}); // CREATE
-router.delete("/update/:id", () => {}); // DELETE
+router.get("/update", () => {});
+router.get("/update/:id", () => {});
+router.put("/update/:id", () => {});
+router.post("/update", () => {});
+router.delete("/update/:id", () => {});
 
 /* Update Point  */
-router.get("/updatepoint", () => {}); // READ
-router.get("/updatepoint/:id", () => {}); // READ
-router.put("/updatepoint/:id", () => {}); // UPDATE
-router.post("/updatepoint", () => {}); // CREATE
-router.delete("/updatepoint/:id", () => {}); // DELETE
+router.get("/updatepoint", () => {});
+router.get("/updatepoint/:id", () => {});
+router.put("/updatepoint/:id", () => {});
+router.post("/updatepoint", () => {});
+router.delete("/updatepoint/:id", () => {});
 
 export default router;
