@@ -22,3 +22,5 @@ router.get("/updatepoint/:id", () => {}); // READ
 router.put("/updatepoint/:id", () => {}); // UPDATE
 router.post("/updatepoint", () => {}); // CREATE
 router.delete("/updatepoint/:id", () => {}); // DELETE
+
+export default router;
