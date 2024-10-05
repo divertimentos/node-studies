@@ -12,7 +12,7 @@
     - [Migrando](#migrando)
   - [Rotas](#rotas)
     - [CRUDs](#cruds)
-  - [Middleware](#middleware)
+  - [Middlewares](#middlewares)
   <!--toc:end-->
 
 ## Useful links
@@ -90,6 +90,6 @@ O Scott disse que as APIs REST funcionaram até 2005 porque, a partir do momento
 
 Criamos as rotas, prevenimos o "hanging" retornando alguma coisa quando é feito um request. Próximo passo é configurar um middleware entre a API e o banco
 
-## Middleware
+## Middlewares
 
 Após instalar o Morgan, tem que instalar `@types/morgan` também.
