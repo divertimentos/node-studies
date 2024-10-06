@@ -13,6 +13,7 @@
   - [Rotas](#rotas)
     - [CRUDs](#cruds)
   - [Middlewares](#middlewares)
+  - [JWT](#jwt)
   <!--toc:end-->
 
 ## Useful links
@@ -93,3 +94,9 @@ Criamos as rotas, prevenimos o "hanging" retornando alguma coisa quando é feito
 ## Middlewares
 
 Após instalar o Morgan, tem que instalar `@types/morgan` também.
+
+Ao colocar `app.use(express.json())` como middleware, estamos permitindo que o cliente nos envie JSON. Ele só não explicou como isso acontece. Mas eu meio que entendi o que ele faz: se você roda o `app.use()` na raiz da aplicação, ele vai chamar essa função e aplicar o que ela retorna.
+
+Middlewares são basicamente alterações nas configurações do seu servidor. O CORS é configurado como middleware, por exemplo.
+
+## JWT
