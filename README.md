@@ -100,3 +100,12 @@ Ao colocar `app.use(express.json())` como middleware, estamos permitindo que o c
 Middlewares são basicamente alterações nas configurações do seu servidor. O CORS é configurado como middleware, por exemplo.
 
 ## JWT
+
+Lembrete de que CORS é diferente de autenticação. O CORS diz respeito ao tipo de request que pode ser feito, enquanto a autenticação é o "cara, crachá" relativo ao usuário.
+
+- CORS: relativo à natureza do request
+- Auth: relativo à identidade do cliente
+
+O JWT (JSON Web Token) nos ajuda com a autenticação em DBs que são _multitenat_, ou seja, são DBs únicos compartilhados por vários usuários. O JWT nos ajuda a garantir que determinado usuário acesse apenas a parte do banco que lhe concerne.
+
+O JWT é um modelo de criptografia. Dada uma chave, uma string, ele transforma um JSON numa string de caracteres (pseudo)aleatórios. Com essa mesma chave fazemos a decriptação. Segundo o Scott, entretanto, isso não é o mesmo que fazer _hashing_. Como não sei a diferença, fica pra um estudo posterior.
