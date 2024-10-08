@@ -2,6 +2,7 @@ import express from "express";
 import router from "./router";
 import morgan from "morgan";
 import cors from "cors";
+import { protect } from "./modules/auth";
 // import haltMiddleware from "./middlewares/halt";
 
 const app = express();
@@ -29,6 +30,6 @@ app.get("/", (_req, res) => {
   res.json({ message: "Eu sou o payload desta API!" });
 });
 
-app.use("/api", router);
+app.use("/api", protect, router);
 
 export default app;
