@@ -112,4 +112,20 @@ O JWT é um modelo de criptografia. Dada uma chave, uma string, ele transforma u
 
 > **Disclaimer sobre o `dotenv`**: o servidor não carrega automaticamente as informações dentro dos arquivos `.env`. O `DATABASE_URL` só está funcionando porque é uma variável reservada do Prisma, que detecta e carrega. Para carregar o secret do JWT, precisamos da lib. Após importar tudo que está em `.env` como `*`, carregamos as variáveis de ambiente lá usando `dotenv.config()`. Fazemos isso no index porque queremos que ele seja carregado imediatamente junto com a aplicação, para que possamos acessá-lo usando o `process.env`.
 
-Um detalhe é que, quando estamos trabalhando com NodeJS, o `try/catch` é importantíssimo para evitar que erros derrubem o servidor.
+Um detalhe é que, quando estamos trabalhando com NodeJS, o `try/catch` é importantíssimo para evitar que erros derrubem o servidor, como [neste exemplo aqui](https://github.com/divertimentos/node-studies/blob/d1b3557b03cdd8dc674002d564aaf4a24f93431a/src/modules/auth.ts#L28), reproduzido abaixo:
+
+```typescript
+// (...)
+try {
+  const user = jwt.verify(token, process.env.JWT_SECRET);
+  req.user = user;
+  next();
+} catch (e) {
+  console.error(e);
+  res.status(401);
+  res.json({ message: "Not valid token!" });
+  return;
+}
+```
+
+Para mais detalhes, consulte o link para o arquivo `modules/auth.ts`.
