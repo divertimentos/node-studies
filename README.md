@@ -129,3 +129,7 @@ try {
 ```
 
 Para mais detalhes, consulte o link para o arquivo `modules/auth.ts`.
+
+> Authentication is tough, and it gets tougher than this. But, for the most part, it's mostly just this... plus other stuff. ~ Scott Moss
+
+Foco no "other stuff".
