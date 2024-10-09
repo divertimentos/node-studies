@@ -1,6 +1,20 @@
 import jwt from "jsonwebtoken";
+import bcrypt from "bcrypt";
 
-export const createJWT = (user) => {
+interface UserInterface {
+  id: string;
+  username: string;
+}
+
+export const comparePasswords = (password: string, hash: string) => {
+  return bcrypt.compare(password, hash);
+};
+
+export const hashPassword = (plainPasswd: string) => {
+  return bcrypt.hash(plainPasswd, 5);
+};
+
+export const createJWT = (user: UserInterface) => {
   const token = jwt.sign(
     { id: user.id, username: user.username },
     process.env.JWT_SECRET,
