@@ -13,7 +13,7 @@
   - [Rotas](#rotas)
     - [CRUDs](#cruds)
   - [Middlewares](#middlewares)
-  - [JWT](#jwt)
+  - [Authentication](#authentication) - [JWT](#jwt) - [Criando usuários](#criando-usuários)
   <!--toc:end-->
 
 ## Useful links
@@ -99,7 +99,9 @@ Ao colocar `app.use(express.json())` como middleware, estamos permitindo que o c
 
 Middlewares são basicamente alterações nas configurações do seu servidor. O CORS é configurado como middleware, por exemplo.
 
-## JWT
+## Authentication
+
+### JWT
 
 Lembrete de que CORS é diferente de autenticação. O CORS diz respeito ao tipo de request que pode ser feito, enquanto a autenticação é o "cara, crachá" relativo ao usuário.
 
@@ -133,3 +135,12 @@ Para mais detalhes, consulte o link para o arquivo `modules/auth.ts`.
 > Authentication is tough, and it gets tougher than this. But, for the most part, it's mostly just this... plus other stuff. ~ Scott Moss
 
 Foco no "other stuff".
+
+### Criando usuários
+
+Algumas informações sobre a natureza assíncrona de algumas ações primordiais no back-end:
+
+- Todo handler é uma função assíncrona
+- porque toda função que acessa um banco é assíncrona.
+- Toda query é assíncrona.
+- Acessar um disco é uma tarefa assíncrona.
