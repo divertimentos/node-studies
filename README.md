@@ -144,3 +144,5 @@ Algumas informações sobre a natureza assíncrona de algumas ações primordiai
 - porque toda função que acessa um banco é assíncrona.
 - Toda query é assíncrona.
 - Acessar um disco é uma tarefa assíncrona.
+
+O Prisma oferece uma forma de visualizar seu banco de dados chamado Studio: `npx prisma studio`.
