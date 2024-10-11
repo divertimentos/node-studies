@@ -4,20 +4,12 @@ const router = Router();
 
 /* Product  */
 
-// READ
 router.get("/product", (req, res) => {
   res.json({ message: "I'm an updated product response!" });
 });
-
 router.get("/product/:id", () => {});
-
-// UPDATE
 router.put("/product/:id", () => {});
-
-// CREATE
-router.post("/product", () => {});
-
-// DELETE
+router.post("/product", (req, res) => {});
 router.delete("/product/:id", () => {});
 
 /* Update  */

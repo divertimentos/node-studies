@@ -1,7 +1,6 @@
 # API design with NodeJS
 
 <!--toc:start-->
-
 - [API design with NodeJS](#api-design-with-nodejs)
   - [Useful links](#useful-links)
   - [Entendendo os schemas e as models](#entendendo-os-schemas-e-as-models)
@@ -13,8 +12,11 @@
   - [Rotas](#rotas)
     - [CRUDs](#cruds)
   - [Middlewares](#middlewares)
-  - [Authentication](#authentication) - [JWT](#jwt) - [Criando usuários](#criando-usuários)
-  <!--toc:end-->
+  - [Authentication](#authentication)
+    - [JWT](#jwt)
+    - [Criando usuários](#criando-usuários)
+  - [Rotas e Tratamento de Erros](#rotas-e-tratamento-de-erros)
+<!--toc:end-->
 
 ## Useful links
 
@@ -146,3 +148,5 @@ Algumas informações sobre a natureza assíncrona de algumas ações primordiai
 - Acessar um disco é uma tarefa assíncrona.
 
 O Prisma oferece uma forma de visualizar seu banco de dados chamado Studio: `npx prisma studio`.
+
+## Rotas e Tratamento de Erros
