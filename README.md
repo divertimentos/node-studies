@@ -1,6 +1,7 @@
 # API design with NodeJS
 
 <!--toc:start-->
+
 - [API design with NodeJS](#api-design-with-nodejs)
   - [Useful links](#useful-links)
   - [Entendendo os schemas e as models](#entendendo-os-schemas-e-as-models)
@@ -16,7 +17,7 @@
     - [JWT](#jwt)
     - [Criando usuários](#criando-usuários)
   - [Rotas e Tratamento de Erros](#rotas-e-tratamento-de-erros)
-<!--toc:end-->
+  <!--toc:end-->
 
 ## Useful links
 
