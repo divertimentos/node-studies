@@ -1,4 +1,4 @@
-function haltMiddleware(app) {
+function halt(app) {
   app.use((req, res, next) => {
     res.status(401);
     console.log("Execution halted!");
@@ -6,4 +6,4 @@ function haltMiddleware(app) {
   });
 }
 
-export default haltMiddleware;
+export default halt;
