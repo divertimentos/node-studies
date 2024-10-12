@@ -3,7 +3,7 @@ import router from "./router";
 import morgan from "morgan";
 import cors from "cors";
 import { protect } from "./modules/auth";
-import { createNewUser, signin } from "./handlers/user";
+import { createNewUser, signin, listUsers } from "./handlers/user";
 // import haltMiddleware from "./middlewares/halt";
 
 const app = express();
@@ -35,6 +35,9 @@ app.use("/api", protect, router);
 
 // creates new user
 app.post("/user", createNewUser);
+
+// lists all users
+app.get("/users", listUsers);
 
 // log in
 app.post("/signin", signin);
