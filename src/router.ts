@@ -1,5 +1,6 @@
 import { Router } from "express";
-import { body, validationResult } from "express-validator";
+import { handleInputErrors } from "./modules/middleware/handleInputErrors";
+import { body, check, oneOf } from "express-validator";
 
 const router = Router();
 
@@ -8,29 +9,60 @@ router.get("/product", (req, res) => {
   res.json({ message: "I'm an updated product response!" });
 });
 router.get("/product/:id", () => {});
-router.put("/product/:id", body("name").isString(), (req, res) => {
-  const errors = validationResult(req);
-
-  if (!errors.isEmpty()) {
-    res.status(400);
-    res.json({ errors: errors.array() });
-  }
-});
-router.post("/product", (req, res) => {});
+router.put(
+  "/product/:id",
+  body("name").isString(),
+  handleInputErrors,
+  (req, res) => {},
+);
+router.post(
+  "/product",
+  body("name").isString(),
+  handleInputErrors,
+  (req, res) => {},
+);
 router.delete("/product/:id", () => {});
 
 /* Update  */
 router.get("/update", () => {});
 router.get("/update/:id", () => {});
-router.put("/update/:id", () => {});
-router.post("/update", () => {});
+router.put(
+  "/update/:id",
+  body("title").optional(),
+  body("body").optional(),
+  // body("status").isIn(["IN_PROGRESS", "SHIPPED", "DEPRECATED"]),
+  oneOf([
+    check("status").equals("IN_PROGRESS"),
+    check("status").equals("SHIPPED"),
+    check("status").equals("DEPRECATED"),
+  ]),
+  body("version").optional(),
+  () => {},
+);
+router.post(
+  "/update",
+  body("title").exists(),
+  body("body").isString(),
+  () => {},
+);
 router.delete("/update/:id", () => {});
 
 /* Update Point  */
 router.get("/updatepoint", () => {});
 router.get("/updatepoint/:id", () => {});
-router.put("/updatepoint/:id", () => {});
-router.post("/updatepoint", () => {});
+router.put(
+  "/updatepoint/:id",
+  body("name").optional().isString(),
+  body("description").optional().isString(),
+  () => {},
+);
+router.post(
+  "/updatepoint",
+  body("name").isString(),
+  body("description").isString(),
+  body("updateId").exists().isString(),
+  () => {},
+);
 router.delete("/updatepoint/:id", () => {});
 
 export default router;
