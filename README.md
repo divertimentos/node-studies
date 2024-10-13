@@ -151,3 +151,9 @@ Algumas informações sobre a natureza assíncrona de algumas ações primordiai
 O Prisma oferece uma forma de visualizar seu banco de dados chamado Studio: `npx prisma studio`.
 
 ## Rotas e Tratamento de Erros
+
+Essa parte de validação usando o `express-validator` eu não entendi muito bem. Talvez seja porque ainda não entendo muito bem como os _schemas_ funcionam.
+
+(O Scott tinha que ter ensinado primeiro as funcionalidades, o CRUD inteiro, para depois tratar os aspectos da validação. Estamos validando sem entender muito bem o porquê.)
+
+Tem algumas coisas relacionadas a migrações que o Scott não deixa muito claro porque talvez ele mesmo não tenha todas as respostas para isso. É um curso no qual devs front-end partem do zero em direção a construir uma API usando ferramentas que fazem parte do trabalho pesado para você, então algumas abstrações você não entende mesmo de cara. Esse é o tradeoff de ver algumas magiquinhas acontecendo entre o Prisma e o db: **em vez de entender o que está havendo, você entende a sintaxe da abstração que é o framework (ou o ORM, como neste caso)**.
