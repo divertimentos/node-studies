@@ -141,6 +141,8 @@ Foco no "other stuff".
 
 ### Criando usuários
 
+![prisma-studio](https://github.com/divertimentos/node-studies/blob/main/media/prisma-studio-users.png)
+
 Algumas informações sobre a natureza assíncrona de algumas ações primordiais no back-end:
 
 - Todo handler é uma função assíncrona
