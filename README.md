@@ -1,6 +1,6 @@
 # API design with NodeJS
 
-![scott](https://github.com/divertimentos/node-studies/blob/main/media/scott.png)
+![scott](https://github.com/divertimentos/node-studies/blob/main/media/scott-moss.png)
 
 <!--toc:start-->
 
