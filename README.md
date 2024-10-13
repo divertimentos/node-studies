@@ -1,5 +1,7 @@
 # API design with NodeJS
 
+![scott](https://github.com/divertimentos/node-studies/blob/main/media/scott.png)
+
 <!--toc:start-->
 
 - [API design with NodeJS](#api-design-with-nodejs)
@@ -85,6 +87,8 @@ Nós conversamos com o banco usando o `prisma/client`. Até agora, só usamos o 
 O comando para migrar é `npx prisma migrate dev --name init`.
 
 ## Rotas
+
+![postman](https://github.com/divertimentos/node-studies/blob/main/media/postman.png)
 
 ### CRUDs
 
