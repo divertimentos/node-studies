@@ -25,7 +25,7 @@ app.use(express.urlencoded({ extended: true }));
 // Custom Middleware
 // haltMiddleware(app);
 
-app.get("/", (_req, res) => {
+app.get("/", (_req, res, next) => {
   // console.log("Hello from Express!");
   // res.status(200);
   // res.json({ message: "Eu sou o payload desta API!" });
@@ -34,7 +34,7 @@ app.get("/", (_req, res) => {
 
   // Asynchronous timeout
   setTimeout(() => {
-    throw new Error("I am an async error, bitch!");
+    next(new Error("I am an async error, bitch!"));
   }, 1);
 });
 
@@ -51,8 +51,18 @@ app.post("/signin", signin);
 
 // Error handler
 app.use((err, req, res, next) => {
-  console.error(err);
-  res.json({ message: "Oops!, that was an error happening!" });
+  switch (err.type) {
+    case "auth":
+      res.status(401).json({ message: "Unauthorized" });
+
+      break;
+    case "input":
+      res.status(400).json({ message: "Invalid input" });
+
+    default:
+      res.status(500).json({ message: "Server error! Not your fault!" });
+      break;
+  }
 });
 
 export default app;
