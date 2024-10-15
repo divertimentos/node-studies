@@ -30,7 +30,12 @@ app.get("/", (_req, res) => {
   // res.status(200);
   // res.json({ message: "Eu sou o payload desta API!" });
 
-  throw new Error("Hello from error thrown!");
+  // throw new Error("Hello from error thrown!");
+
+  // Asynchronous timeout
+  setTimeout(() => {
+    throw new Error("I am an async error, bitch!");
+  }, 1);
 });
 
 app.use("/api", protect, router);
