@@ -173,3 +173,11 @@ Bom, até agora entendemos os princípios do funcionamento de uma API. Você def
 Até aqui, tirando a coisa de decorar sintaxe, que leva tempo mesmo, o maior desafio foi entender como se dão as relações entre tabelas e entender o funcionamento do `belongsToId`. Preciso entender melhor o papel que cada **tipo** tem nos diferentes schemas que se inter-relacionam.
 
 Informação adicional sobre migrations: o critério para rodar migrations é fazê-lo toda vez que há alteração no schema. No nosso caso, `npx prisma migrate dev`.
+
+### Error handling
+
+O Express dá um jeito de tratar erros sem que você precise usar o `try/catch` em todo lugar.
+
+Os handlers de erro do Express funcionam como qualquer outro handler; a diferença é que eles devem ser chamados _após_ as rotas. Se forem colocados antes, não tem como eles "pegarem/escutarem" os erros nas rotas. Partindo de um ponto de vista de programação estruturada — que parece muito a forma como a gente constrói APIs aqui —, isso faz todo sentido.
+
+### Async Error Handlers

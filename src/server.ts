@@ -26,9 +26,11 @@ app.use(express.urlencoded({ extended: true }));
 // haltMiddleware(app);
 
 app.get("/", (_req, res) => {
-  console.log("Hello from Express!");
-  res.status(200);
-  res.json({ message: "Eu sou o payload desta API!" });
+  // console.log("Hello from Express!");
+  // res.status(200);
+  // res.json({ message: "Eu sou o payload desta API!" });
+
+  throw new Error("Hello from error thrown!");
 });
 
 app.use("/api", protect, router);
@@ -41,5 +43,11 @@ app.get("/users", listUsers);
 
 // log in
 app.post("/signin", signin);
+
+// Error handler
+app.use((err, req, res, next) => {
+  console.error(err);
+  res.json({ message: "Oops!, that was an error happening!" });
+});
 
 export default app;
