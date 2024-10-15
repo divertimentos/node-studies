@@ -1,32 +1,33 @@
 # API design with NodeJS
 
 <!--toc:start-->
+
 - [API design with NodeJS](#api-design-with-nodejs)
-  - [Useful links](#useful-links)
-  - [Entendendo os schemas e as models](#entendendo-os-schemas-e-as-models)
-  - [Migrations](#migrations)
-    - [Relacional vs não relacional](#relacional-vs-não-relacional)
-      - [Bancos de dados relacionais](#bancos-de-dados-relacionais)
-      - [Bancos de dados não relacionais (NoSQL)](#bancos-de-dados-não-relacionais-nosql)
-    - [Migrando](#migrando)
-  - [Rotas](#rotas)
-    - [CRUDs](#cruds)
-  - [Middlewares](#middlewares)
-  - [Authentication](#authentication)
-    - [JWT](#jwt)
-    - [Criando usuários](#criando-usuários)
-  - [Rotas e Tratamento de Erros](#rotas-e-tratamento-de-erros)
-    - [Error handling](#error-handling)
-    - [Async Error Handlers](#async-error-handlers)
-<!--toc:end-->
+- [Useful links](#useful-links)
+- [Entendendo os schemas e as models](#entendendo-os-schemas-e-as-models)
+- [Migrations](#migrations)
+  - [Relacional vs não relacional](#relacional-vs-não-relacional)
+    - [Bancos de dados relacionais](#bancos-de-dados-relacionais)
+    - [Bancos de dados não relacionais (NoSQL)](#bancos-de-dados-não-relacionais-nosql)
+  - [Migrando](#migrando)
+- [Rotas](#rotas)
+  - [CRUDs](#cruds)
+- [Middlewares](#middlewares)
+- [Authentication](#authentication)
+  - [JWT](#jwt)
+  - [Criando usuários](#criando-usuários)
+- [Rotas e Tratamento de Erros](#rotas-e-tratamento-de-erros)
+  - [Error handling](#error-handling)
+  - [Async Error Handlers](#async-error-handlers)
+  <!--toc:end-->
 
 ![scott](https://github.com/divertimentos/node-studies/blob/main/media/scott-moss.png)
 
-## Useful links
+# Useful links
 
 - [Render](https://dashboard.render.com/)
 
-## Entendendo os schemas e as models
+# Entendendo os schemas e as models
 
 Um produto pertence a um usuário. Qual é a relação? one-to-one? One-to-many? Many-to-many?
 
@@ -61,19 +62,19 @@ Alteramos de `Product` para `products` para ficar mais coerente com os outros it
 - Quando queremos limitar os caracteres de determinada string, usamos o decorador `@db.VarChar(255)`, sendo `255`o valor desejado.
 - É curioso tentar interconectar os conhecimentos, partindo do front-end, que consome APIs, chegando no back-end novamnete, onde são configuradas todas as relações entre as informações. Fico imaginando se cada campo de cada schema vai se tornar uma propriedade no JSON final, e se cada Schema será um endpoint com seu respectivo payload sendo montado a partir dos campos e o resultado das relações.
 
-## Migrations
+# Migrations
 
 Migração é um conceito presente quando se fala de bancos de dados relacionais. Migrar é ensinar ao banco qual é o formato das tabelas que ele deverá criar. Migrações també são usadas para atualizar o formato das tabelas, como por exemplo inserir um campo novo numa model. Bancos de dados non-SQL não utilizam esse conceito.
 
-### Relacional vs não relacional
+## Relacional vs não relacional
 
-#### Bancos de dados relacionais
+### Bancos de dados relacionais
 
 - Bancos de dados relacionais guardam valores em tabelas. Geralmente, essas tabelas possuem informações compartilhadas entre si, resultando em um relacionamento. Isso é o aspecto principal de um banco de dados relacional.
 - As colunas da tabela definem informações a serem guardadas, enquanto as linhas guardam as informação em si. A relação é entre colunas, pois elas potencialmente guardam muitas linhas de uma vez.
 - Segundo o blog do MongoDB, a melhor forma de interagir com bancos de dados relacionais é usando SQL, uma linguagem feita para fazer queries em bancos.
 
-#### Bancos de dados não relacionais (NoSQL)
+### Bancos de dados não relacionais (NoSQL)
 
 - Primeira coisa: bancos relacionais e não relacionais são proporcionais a bancos "SQL" e "NoSQL", e NoSQL significa "Not only SQL".
 - Esse tipo de banco não utiliza tabelas, campos e colunas. Eles são pensados para ser _cloud-driven_.
@@ -81,17 +82,17 @@ Migração é um conceito presente quando se fala de bancos de dados relacionais
 
 (Fonte: [Site do MongoDB](https://www.mongodb.com/resources/compare/relational-vs-non-relational-databases))
 
-### Migrando
+## Migrando
 
 Nós conversamos com o banco usando o `prisma/client`. Até agora, só usamos o CLI do Prisma, basicamente para formatar o código da schema.
 
 O comando para migrar é `npx prisma migrate dev --name init`.
 
-## Rotas
+# Rotas
 
 ![postman](https://github.com/divertimentos/node-studies/blob/main/media/postman.png)
 
-### CRUDs
+## CRUDs
 
 Diferentemente do que sempre ouvi de devs backend experientes, o CRUD é mais importante do que parece. Sempre ouvi pessoas fazendo troça de empresas que no anúncio da vaga esperam que você sabia ciência de foguete, para no dia a dia você fazer CRUD. Pelo que o Scott deu a entender, basicamente todo software com o qual interagimos é um CRUD. Então, se todo software é um CRUD, então nenhum é. O CRUD é apenas a premissa básica na qual o back-end se baseia.
 
@@ -99,7 +100,7 @@ O Scott disse que as APIs REST funcionaram até 2005 porque, a partir do momento
 
 Criamos as rotas, prevenimos o "hanging" retornando alguma coisa quando é feito um request. Próximo passo é configurar um middleware entre a API e o banco
 
-## Middlewares
+# Middlewares
 
 Após instalar o Morgan, tem que instalar `@types/morgan` também.
 
@@ -107,14 +108,14 @@ Ao colocar `app.use(express.json())` como middleware, estamos permitindo que o c
 
 Middlewares são basicamente alterações nas configurações do seu servidor. O CORS é configurado como middleware, por exemplo.
 
-## Authentication
-
-### JWT
+# Authentication
 
 Lembrete de que CORS é diferente de autenticação. O CORS diz respeito ao tipo de request que pode ser feito, enquanto a autenticação é o "cara, crachá" relativo ao usuário.
 
 - CORS: relativo à natureza do request
 - Auth: relativo à identidade do cliente
+
+## JWT
 
 O JWT (_JSON Web Token_) nos ajuda com a autenticação em DBs que são _multitenat_, ou seja, são DBs únicos compartilhados por vários usuários. O JWT nos ajuda a garantir que determinado usuário acesse apenas a parte do banco que lhe concerne.
 
@@ -144,7 +145,7 @@ Para mais detalhes, consulte o link para o arquivo `modules/auth.ts`.
 
 Foco no "other stuff".
 
-### Criando usuários
+## Criando usuários
 
 ![prisma-studio](https://github.com/divertimentos/node-studies/blob/main/media/prisma-studio-users.png)
 
@@ -157,7 +158,7 @@ Algumas informações sobre a natureza assíncrona de algumas ações primordiai
 
 O Prisma oferece uma forma de visualizar seu banco de dados chamado Studio: `npx prisma studio`.
 
-## Rotas e Tratamento de Erros
+# Rotas e Tratamento de Erros
 
 Essa parte de validação usando o `express-validator` eu não entendi muito bem. Talvez seja porque ainda não entendo muito bem como os _schemas_ funcionam.
 
@@ -173,13 +174,13 @@ Até aqui, tirando a coisa de decorar sintaxe, que leva tempo mesmo, o maior des
 
 Informação adicional sobre migrations: o critério para rodar migrations é fazê-lo toda vez que há alteração no schema. No nosso caso, `npx prisma migrate dev`.
 
-### Error handling
+## Error handling
 
 O Express dá um jeito de tratar erros sem que você precise usar o `try/catch` em todo lugar.
 
 Os handlers de erro do Express funcionam como qualquer outro handler; a diferença é que eles devem ser chamados _após_ as rotas. Se forem colocados antes, não tem como eles "pegarem/escutarem" os erros nas rotas. Partindo de um ponto de vista de programação estruturada — que parece muito a forma como a gente constrói APIs aqui —, isso faz todo sentido.
 
-### Async Error Handlers
+## Async Error Handlers
 
 O Scott disse anteriormente que handlers não recebem parâmetro `next`. Era uma mentira, segundo ele.
 
@@ -194,3 +195,5 @@ app.get("/", (req, res, next) => {
   }, 1000);
 });
 ```
+
+Isso tudo acontece porque neste exemplo estamos lidando com erros assíncronos.
