@@ -1,7 +1,6 @@
 # API design with NodeJS
 
 <!--toc:start-->
-
 - [API design with NodeJS](#api-design-with-nodejs)
   - [Useful links](#useful-links)
   - [Entendendo os schemas e as models](#entendendo-os-schemas-e-as-models)
@@ -16,8 +15,10 @@
   - [Authentication](#authentication)
     - [JWT](#jwt)
     - [Criando usuários](#criando-usuários)
-  - [Rotas e Tratamento de Erros](#rotas-e-tratamento-de-erros) - [Error handling](#error-handling) - [Async Error Handlers](#async-error-handlers)
-  <!--toc:end-->
+  - [Rotas e Tratamento de Erros](#rotas-e-tratamento-de-erros)
+    - [Error handling](#error-handling)
+    - [Async Error Handlers](#async-error-handlers)
+<!--toc:end-->
 
 ![scott](https://github.com/divertimentos/node-studies/blob/main/media/scott-moss.png)
 
