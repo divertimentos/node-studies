@@ -1,7 +1,5 @@
 # API design with NodeJS
 
-![scott](https://github.com/divertimentos/node-studies/blob/main/media/scott-moss.png)
-
 <!--toc:start-->
 
 - [API design with NodeJS](#api-design-with-nodejs)
@@ -18,8 +16,10 @@
   - [Authentication](#authentication)
     - [JWT](#jwt)
     - [Criando usuários](#criando-usuários)
-  - [Rotas e Tratamento de Erros](#rotas-e-tratamento-de-erros)
+  - [Rotas e Tratamento de Erros](#rotas-e-tratamento-de-erros) - [Error handling](#error-handling) - [Async Error Handlers](#async-error-handlers)
   <!--toc:end-->
+
+![scott](https://github.com/divertimentos/node-studies/blob/main/media/scott-moss.png)
 
 ## Useful links
 
@@ -166,8 +166,6 @@ Tem algumas coisas relacionadas a migrações que o Scott não deixa muito claro
 
 As queries de databases começam a ficar complexas quando introduzimos os relacionamentos entre tabelas. Antes disso, é tudo direto e reto, uma query só e já era. Planejar como navegar pelos dados. Tem até um nome para isso, "query plan". Agora entendo o que devs back-end querem dizer quando falam sobre otimização de acesso ao banco; eles estão otimizando as queries para serem mais econômicas. Prós e contras, não há modelo ideal. Se bancos relacionais são amplamente usados até hoje, é porque valem a pena.
 
----
-
 Bom, até agora entendemos os princípios do funcionamento de uma API. Você define rotas e funções de callback. Cada rota sabe qual tipo de verbo esperar, e a função escrita precisa agir de acordo. O servidor fica escutando os requests e respondendo, _non-stop_. O Prisma, sendo um ORM, nos ajuda a navegar pelas tabelas do banco, criadas a partir de um Schema e atualizadas através de migrations feitas quando necessário. E assim vamos criando CRUDs.
 
 Até aqui, tirando a coisa de decorar sintaxe, que leva tempo mesmo, o maior desafio foi entender como se dão as relações entre tabelas e entender o funcionamento do `belongsToId`. Preciso entender melhor o papel que cada **tipo** tem nos diferentes schemas que se inter-relacionam.
@@ -181,3 +179,15 @@ O Express dá um jeito de tratar erros sem que você precise usar o `try/catch` 
 Os handlers de erro do Express funcionam como qualquer outro handler; a diferença é que eles devem ser chamados _após_ as rotas. Se forem colocados antes, não tem como eles "pegarem/escutarem" os erros nas rotas. Partindo de um ponto de vista de programação estruturada — que parece muito a forma como a gente constrói APIs aqui —, isso faz todo sentido.
 
 ### Async Error Handlers
+
+O Scott disse anteriormente que handlers não recebem parâmetro `next`. Era uma mentira, segundo ele. Pra passar erros, eles usam. Lembrando que o paâmetro `next` é geralmente associado a middlewares. Esse ajuste de ~mindset acontece porque, em teoria, nada acontece após uma rota. Se o endpoint chegou no seu ponto final (_pun intended_), não tem porque um callback `next` ser chamado. Entretanto, como os handlers de erro necessariamente acontecem após um erro acontecer **após** o cliente bater no endpoint, esse fato subverte a lógica anterior e, então, o `next` encontra seu lugar para poder rodar o handler de erro..
+
+E tem uma outra coisa: tudo que você passar dentro do `next` é tratado como erro. Exemplo simpes:
+
+```typescript
+app.get("/", (req, res, next) => {
+  setTimeout(() => {
+    next(new Error("This is an error!")); // <---
+  }, 1000);
+});
+```
