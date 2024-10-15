@@ -203,3 +203,19 @@ Isso tudo acontece porque neste exemplo estamos lidando com erros assíncronos.
 O Scott perguntou para a plateia como tratamos erros assíncronos no dia a dia. Responderam, corretamente, que usando o `try/catch`. Eu não sabia disso. Lição aprendida.
 
 O Scott disse que ficar enchendo o código de `try/catch` é tedioso, ainda mais tendo que re-escrever funções posteriormente apenas para tratar erros. Disse que existe uma solução não tediosa para resolver isso, mas não falou qual. Imagino que se ele revelar depois, vai dizer que são testes unitários pré-commit/deploy? Se não for isso, deve ter alguma lib estabelecida que cuide disso sem causar muito drama no dev backend.
+
+## Process
+
+Existe uma outra forma de pegar erros que está para além do Express; é coisa do NodeJS a nível de sistema operacional mesmo, que é o `process`:
+
+```typescript
+// synchronous exceptions
+process.on("uncaughtException", () => {});
+```
+
+```typescript
+// asynchronous exceptions
+process.on("unhandledRejection", () => {});
+```
+
+Segundo o Scott, é interessante ter essas funções em algum lugar da aplicação para lidar com esse tipo de erro mais esquisito.
