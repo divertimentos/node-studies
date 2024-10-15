@@ -2,7 +2,13 @@ import { Router } from "express";
 import { handleInputErrors } from "./modules/middleware/handleInputErrors";
 import { body, check, oneOf } from "express-validator";
 import { createProduct, deleteProduct, getProducts } from "./handlers/product";
-import { getOneupdate, getUpdates } from "./handlers/update";
+import {
+  createUpdate,
+  deleteUpdate,
+  getOneupdate,
+  getUpdates,
+  updateUpdate,
+} from "./handlers/update";
 
 const router = Router();
 
@@ -31,22 +37,26 @@ router.put(
   "/update/:id",
   body("title").optional(),
   body("body").optional(),
-  // body("status").isIn(["IN_PROGRESS", "SHIPPED", "DEPRECATED"]),
-  oneOf([
-    check("status").equals("IN_PROGRESS"),
-    check("status").equals("SHIPPED"),
-    check("status").equals("DEPRECATED"),
-  ]),
+
+  // NOTE: talvez possam ser usados 'interchangeably'. Guarda pra testar no final do curso
+  body("status").isIn(["IN_PROGRESS", "SHIPPED", "DEPRECATED"]).optional(),
+
+  // oneOf([
+  //   check("status").equals("IN_PROGRESS"),
+  //   check("status").equals("SHIPPED"),
+  //   check("status").equals("DEPRECATED"),
+  // ]),
   body("version").optional(),
-  () => {},
+  updateUpdate,
 );
 router.post(
   "/update",
   body("title").exists(),
   body("body").isString(),
-  () => {},
+  body("productId").exists().isString(),
+  createUpdate,
 );
-router.delete("/update/:id", () => {});
+router.delete("/update/:id", deleteUpdate);
 
 /* Update Point  */
 router.get("/updatepoint", () => {});
