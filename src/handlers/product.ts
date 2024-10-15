@@ -66,6 +66,7 @@ export const deleteProduct = async (req, res) => {
         },
       },
     });
+
     res.status(200);
     res.json({ data: deleted });
   } catch (error) {

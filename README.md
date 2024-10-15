@@ -165,3 +165,11 @@ Essa parte de validação usando o `express-validator` eu não entendi muito bem
 Tem algumas coisas relacionadas a migrações que o Scott não deixa muito claro porque talvez ele mesmo não tenha todas as respostas para isso. É um curso no qual devs front-end partem do zero em direção a construir uma API usando ferramentas que fazem parte do trabalho pesado para você, então algumas abstrações você não entende mesmo de cara. Esse é o tradeoff de ver algumas magiquinhas acontecendo entre o Prisma e o db: **em vez de entender o que está havendo, você entende a sintaxe da abstração que é o framework (ou o ORM, como neste caso)**.
 
 As queries de databases começam a ficar complexas quando introduzimos os relacionamentos entre tabelas. Antes disso, é tudo direto e reto, uma query só e já era. Planejar como navegar pelos dados. Tem até um nome para isso, "query plan". Agora entendo o que devs back-end querem dizer quando falam sobre otimização de acesso ao banco; eles estão otimizando as queries para serem mais econômicas. Prós e contras, não há modelo ideal. Se bancos relacionais são amplamente usados até hoje, é porque valem a pena.
+
+---
+
+Bom, até agora entendemos os princípios do funcionamento de uma API. Você define rotas e funções de callback. Cada rota sabe qual tipo de verbo esperar, e a função escrita precisa agir de acordo. O servidor fica escutando os requests e respondendo, _non-stop_. O Prisma, sendo um ORM, nos ajuda a navegar pelas tabelas do banco, criadas a partir de um Schema e atualizadas através de migrations feitas quando necessário. E assim vamos criando CRUDs.
+
+Até aqui, tirando a coisa de decorar sintaxe, que leva tempo mesmo, o maior desafio foi entender como se dão as relações entre tabelas e entender o funcionamento do `belongsToId`. Preciso entender melhor o papel que cada **tipo** tem nos diferentes schemas que se inter-relacionam.
+
+Informação adicional sobre migrations: o critério para rodar migrations é fazê-lo toda vez que há alteração no schema. No nosso caso, `npx prisma migrate dev`.
