@@ -183,7 +183,7 @@ Os handlers de erro do Express funcionam como qualquer outro handler; a diferen�
 
 O Scott disse anteriormente que handlers não recebem parâmetro `next`. Era uma mentira, segundo ele.
 
-Pra passar erros, eles usam o `next`, sim. Lembrando que o parâmetro `next` é geralmente associado a _middlewares_. Esse ajuste de ~~mindset acontece porque, em teoria, nada acontece após uma rota. Isso significa que depois que o **endpoint** chegou no seu **ponto final** (_pun intended_), não tem porque um callback `next` ser chamado. Entretanto, como os handlers de erro necessariamente acontecem após erros, **após** o cliente bater no endpoint, esse fato subverte a lógica anterior. O `next`, então, encontra seu lugar e, por sua vez, chama o handler de erro.
+Pra passar erros, eles usam o `next`, sim. Lembrando que o parâmetro `next` é geralmente associado a _middlewares_. Esse ajuste de ~~mindset acontece porque, em teoria, nada acontece após uma rota. Isso significa que, depois que o **endpoint** chegou no seu **ponto final** (_pun intended_), não tem por que um callback `next` ser chamado. Entretanto, como os handlers de erro necessariamente acontecem após erros, **após** o cliente bater no endpoint, esse fato subverte a lógica anterior. O `next`, então, encontra seu lugar e, por sua vez, chama o handler de erro.
 
 E tem uma outra coisa: tudo que você passar dentro do `next` é tratado como erro. Exemplo simpes:
 
