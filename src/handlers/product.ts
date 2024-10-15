@@ -57,14 +57,20 @@ export const updateProduct = async (req, res) => {
 
 // Delete a product
 export const deleteProduct = async (req, res) => {
-  const deleted = await prisma.product.delete({
-    where: {
-      id_belongsToId: {
-        id: req.params.id,
-        belongsToId: req.user.id,
+  try {
+    const deleted = await prisma.product.delete({
+      where: {
+        id_belongsToId: {
+          id: req.params.id,
+          belongsToId: req.user.id,
+        },
       },
-    },
-  });
-
-  res.json({ data: deleted });
+    });
+    res.status(200);
+    res.json({ data: deleted });
+  } catch (error) {
+    console.log(error);
+    res.status(403);
+    res.json({ error: error });
+  }
 };

@@ -1,7 +1,8 @@
 import { Router } from "express";
 import { handleInputErrors } from "./modules/middleware/handleInputErrors";
 import { body, check, oneOf } from "express-validator";
-import { createProduct, getProduct, getProducts } from "./handlers/product";
+import { createProduct, deleteProduct, getProducts } from "./handlers/product";
+import { getOneupdate, getUpdates } from "./handlers/update";
 
 const router = Router();
 
@@ -12,7 +13,7 @@ router.put(
   "/product/:id",
   body("name").isString(),
   handleInputErrors,
-  (req, res) => {},
+  () => {},
 );
 router.post(
   "/product",
@@ -21,11 +22,11 @@ router.post(
   createProduct,
 );
 
-router.delete("/product/:id", () => {});
+router.delete("/product/:id", deleteProduct);
 
 /* Update  */
-router.get("/update", () => {});
-router.get("/update/:id", () => {});
+router.get("/update", getUpdates);
+router.get("/update/:id", getOneupdate);
 router.put(
   "/update/:id",
   body("title").optional(),
