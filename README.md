@@ -19,6 +19,8 @@
 - [Rotas e Tratamento de Erros](#rotas-e-tratamento-de-erros)
   - [Error handling](#error-handling)
   - [Async Error Handlers](#async-error-handlers)
+  - [Process](#process)
+  - [Environments](#environments)
   <!--toc:end-->
 
 ![scott](https://github.com/divertimentos/node-studies/blob/main/media/scott-moss.png)
@@ -219,3 +221,7 @@ process.on("unhandledRejection", () => {});
 ```
 
 Segundo o Scott, é interessante ter essas funções em algum lugar da aplicação para lidar com esse tipo de erro mais esquisito.
+
+## Environments and environment variables
+
+O ambiente (ou _environment_) é onde o seu código está rodando. A variável de ambiente `NODE_VAR` é uma string que vai dizer ao NodeJS em qual ambiente ele está rodando. O React é um exemplo de ferramenta que se utiliza dessa variável especial.
