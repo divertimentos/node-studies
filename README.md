@@ -20,7 +20,7 @@
   - [Error handling](#error-handling)
   - [Async Error Handlers](#async-error-handlers)
   - [Process](#process)
-  - [Environments](#environments)
+  - [Environments and environment variables](#environments-and-environment-variables)
   <!--toc:end-->
 
 ![scott](https://github.com/divertimentos/node-studies/blob/main/media/scott-moss.png)
