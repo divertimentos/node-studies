@@ -20,7 +20,10 @@
   - [Error handling](#error-handling)
   - [Async Error Handlers](#async-error-handlers)
   - [Process](#process)
+- [Configs, Performance, Testing](#configs-performance-testing)
   - [Environments and environment variables](#environments-and-environment-variables)
+  - [Performance Management with Async](#performance-management-with-async)
+  - [Blocking Code](#blocking-code)
   <!--toc:end-->
 
 ![scott](https://github.com/divertimentos/node-studies/blob/main/media/scott-moss.png)
@@ -222,6 +225,8 @@ process.on("unhandledRejection", () => {});
 
 Segundo o Scott, é interessante ter essas funções em algum lugar da aplicação para lidar com esse tipo de erro mais esquisito.
 
+# Configs, Performance, Testing
+
 ## Environments and environment variables
 
 O ambiente (ou _environment_) é onde o seu código está rodando. A variável de ambiente `NODE_VAR` é uma string que vai dizer ao NodeJS em qual ambiente ele está rodando. O React é um exemplo de ferramenta que se utiliza dessa variável especial.
@@ -231,3 +236,20 @@ Tem essa lib do Lodash, o `merge`, que meio que gerencia as variáveis de ambien
 É algo que eu ainda preciso ver com calma porque, por exemplo, para setar o ambiente de PROD o Scott usa `STAGE=production pnpm run server`. É uma sintaxe estranha a mim. Preciso rever isso para generalizar a informação.
 
 ## Performance Management with Async
+
+O Scott disse que, até agora, estamos competentes em criar APIS usando NodeJS + Express. E eu sinto que faz sentido. Este repositório é um bom boilerplate. Só preciso descobrir, depois, como fazer para não depender do Render. De repente, ver se é possível criar um DB e acessá-lo localmente mesmo, usando o armazenamento físico da máquina. Sou tão iniciante no assunto que nem sei como se chama esse tipo de solução. Não quero depender de um serviço na nuvem para fazer minhas migrations para projetinhos pequenos de aprendizado.
+
+Mas, voltando ao Scott, ele disse que, quando você passa a pensar em performance, você deixa de ser um bom dev que sabe criar APIs e passa a ser um excelente dev quando se trata de APIs.
+
+## Blocking Code
+
+O conceito de bloqueio é simplesmente o JS não ir para a linha 2 enquanto a linha 1 não for resolvida.
+
+```typescript
+const myself = "Gui";
+console.log(`You are ${myself}, and we are the universe.`);
+```
+
+Nós só não percebemos isso porque criar variáveis e chamá-las é uma tarefa considerada síncrona. O problema acontece quando, por exemplo, uma das suas rotas retorna um cálculo pesado. Enquanto isso, todos os seus outros endpoints ficarão aguardando. Acho que aqui vamos entrar no conceito de concorrência (oi, programação funcional!)
+
+Uma das formas de lidar com esse bloqueio é usando o `async/await`.
