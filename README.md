@@ -225,3 +225,9 @@ Segundo o Scott, é interessante ter essas funções em algum lugar da aplicaç�
 ## Environments and environment variables
 
 O ambiente (ou _environment_) é onde o seu código está rodando. A variável de ambiente `NODE_VAR` é uma string que vai dizer ao NodeJS em qual ambiente ele está rodando. O React é um exemplo de ferramenta que se utiliza dessa variável especial.
+
+Tem essa lib do Lodash, o `merge`, que meio que gerencia as variáveis de ambiente pra você. Ela gerencia todas de uma vez e, pelo que entendi, funciona harmonicamente com o `dotenv`.
+
+É algo que eu ainda preciso ver com calma porque, por exemplo, para setar o ambiente de PROD o Scott usa `STAGE=production pnpm run server`. É uma sintaxe estranha a mim. Preciso rever isso para generalizar a informação.
+
+## Performance Management with Async
