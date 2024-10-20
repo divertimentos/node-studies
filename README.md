@@ -3,32 +3,34 @@
 <!--toc:start-->
 
 - [API design with NodeJS](#api-design-with-nodejs)
-- [Useful links](#useful-links)
+- [Links Úteis](#links-úteis)
 - [Entendendo os schemas e as models](#entendendo-os-schemas-e-as-models)
 - [Migrations](#migrations)
-  - [Relacional vs não relacional](#relacional-vs-não-relacional)
+  - [Banco de dados Relacional vs DB não relacional](#banco-de-dados-relacional-vs-db-não-relacional)
     - [Bancos de dados relacionais](#bancos-de-dados-relacionais)
     - [Bancos de dados não relacionais (NoSQL)](#bancos-de-dados-não-relacionais-nosql)
   - [Migrando](#migrando)
 - [Rotas](#rotas)
   - [CRUDs](#cruds)
 - [Middlewares](#middlewares)
-- [Authentication](#authentication)
+- [Autenticação](#autenticação)
   - [JWT](#jwt)
   - [Criando usuários](#criando-usuários)
 - [Rotas e Tratamento de Erros](#rotas-e-tratamento-de-erros)
-  - [Error handling](#error-handling)
-  - [Async Error Handlers](#async-error-handlers)
+  - [Tratamento de Erros](#tratamento-de-erros)
+  - [Handlers de erros assíncronos](#handlers-de-erros-assíncronos)
   - [Process](#process)
-- [Configs, Performance, Testing](#configs-performance-testing)
-  - [Environments and environment variables](#environments-and-environment-variables)
-  - [Performance Management with Async](#performance-management-with-async)
+- [Configurações, Performance, Testes](#configurações-performance-testes)
+  - [Ambientes e varáveis de ambiente](#ambientes-e-varáveis-de-ambiente)
+  - [Gerenciamento de Performance com Async](#gerenciamento-de-performance-com-async)
   - [Blocking Code](#blocking-code)
+  - [Testes unitários](#testes-unitários)
+  - [Testes de integração](#testes-de-integração)
   <!--toc:end-->
 
 ![scott](https://github.com/divertimentos/node-studies/blob/main/media/scott-moss.png)
 
-# Useful links
+# Links Úteis
 
 - [Render](https://dashboard.render.com/)
 
@@ -71,7 +73,7 @@ Alteramos de `Product` para `products` para ficar mais coerente com os outros it
 
 Migração é um conceito presente quando se fala de bancos de dados relacionais. Migrar é ensinar ao banco qual é o formato das tabelas que ele deverá criar. Migrações també são usadas para atualizar o formato das tabelas, como por exemplo inserir um campo novo numa model. Bancos de dados non-SQL não utilizam esse conceito.
 
-## Relacional vs não relacional
+## Banco de dados Relacional vs DB não relacional
 
 ### Bancos de dados relacionais
 
@@ -113,7 +115,7 @@ Ao colocar `app.use(express.json())` como middleware, estamos permitindo que o c
 
 Middlewares são basicamente alterações nas configurações do seu servidor. O CORS é configurado como middleware, por exemplo.
 
-# Authentication
+# Autenticação
 
 Lembrete de que CORS é diferente de autenticação. O CORS diz respeito ao tipo de request que pode ser feito, enquanto a autenticação é o "cara, crachá" relativo ao usuário.
 
@@ -179,13 +181,13 @@ Até aqui, tirando a coisa de decorar sintaxe, que leva tempo mesmo, o maior des
 
 Informação adicional sobre migrations: o critério para rodar migrations é fazê-lo toda vez que há alteração no schema. No nosso caso, `npx prisma migrate dev`.
 
-## Error handling
+## Tratamento de Erros
 
 O Express dá um jeito de tratar erros sem que você precise usar o `try/catch` em todo lugar.
 
 Os handlers de erro do Express funcionam como qualquer outro handler; a diferença é que eles devem ser chamados _após_ as rotas. Se forem colocados antes, não tem como eles "pegarem/escutarem" os erros nas rotas. Partindo de um ponto de vista de programação estruturada — que parece muito a forma como a gente constrói APIs aqui —, isso faz todo sentido.
 
-## Async Error Handlers
+## Handlers de erros assíncronos
 
 O Scott disse anteriormente que handlers não recebem parâmetro `next`. Era uma mentira, segundo ele.
 
@@ -225,9 +227,9 @@ process.on("unhandledRejection", () => {});
 
 Segundo o Scott, é interessante ter essas funções em algum lugar da aplicação para lidar com esse tipo de erro mais esquisito.
 
-# Configs, Performance, Testing
+# Configurações, Performance, Testes
 
-## Environments and environment variables
+## Ambientes e varáveis de ambiente
 
 O ambiente (ou _environment_) é onde o seu código está rodando. A variável de ambiente `NODE_VAR` é uma string que vai dizer ao NodeJS em qual ambiente ele está rodando. O React é um exemplo de ferramenta que se utiliza dessa variável especial.
 
@@ -235,7 +237,7 @@ Tem essa lib do Lodash, o `merge`, que meio que gerencia as variáveis de ambien
 
 É algo que eu ainda preciso ver com calma porque, por exemplo, para setar o ambiente de PROD o Scott usa `STAGE=production pnpm run server`. É uma sintaxe estranha a mim. Preciso rever isso para generalizar a informação.
 
-## Performance Management with Async
+## Gerenciamento de Performance com Async
 
 O Scott disse que, até agora, estamos competentes em criar APIS usando NodeJS + Express. E eu sinto que faz sentido. Este repositório é um bom boilerplate. Só preciso descobrir, depois, como fazer para não depender do Render. De repente, ver se é possível criar um DB e acessá-lo localmente mesmo, usando o armazenamento físico da máquina. Sou tão iniciante no assunto que nem sei como se chama esse tipo de solução. Não quero depender de um serviço na nuvem para fazer minhas migrations para projetinhos pequenos de aprendizado.
 
@@ -253,3 +255,17 @@ console.log(`You are ${myself}, and we are the universe.`);
 Nós só não percebemos isso porque criar variáveis e chamá-las é uma tarefa considerada síncrona. O problema acontece quando, por exemplo, uma das suas rotas retorna um cálculo pesado. Enquanto isso, todos os seus outros endpoints ficarão aguardando. Acho que aqui vamos entrar no conceito de concorrência (oi, programação funcional!)
 
 Uma das formas de lidar com esse bloqueio é usando o `async/await`.
+
+## Testes unitários
+
+Testes unitários são úteis para testar pedaços lógicos unitários, isolados de outras partes da aplicação. Possso assumir que o escopo ideal do teste unitário é a função pura. Ou, num escopo mais abrangente, as funções/métodos.
+
+- Para escrever um teste, você precisa ter um código testável. Isso é importante.
+
+* Colocamos as pastas de testes (`__tests__/`) próximas ao código que estamos testando simplesmente para simplificar a importação das funções. É igualmente razoável centralizar todos os testes na raiz do projeto, por exemplo.
+
+Fun fact: `npm start` e `npm test` são os únicos comandos no NPM que você não precisa usar `run`.
+
+Infelizmente o Scott não demonstrou como realmente testar qualquer uma das funções que criamos aqui.
+
+## Testes de integração
