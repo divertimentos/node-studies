@@ -249,6 +249,7 @@ O conceito de bloqueio é simplesmente o JS não ir para a linha 2 enquanto a li
 
 ```typescript
 const myself = "Gui";
+
 console.log(`You are ${myself}, and we are the universe.`);
 ```
 
@@ -268,4 +269,11 @@ Fun fact: `npm start` e `npm test` são os únicos comandos no NPM que você nã
 
 Infelizmente o Scott não demonstrou como realmente testar qualquer uma das funções que criamos aqui.
 
-## Testes de integração
+## Testes de integração (usando Supertest)
+
+Ok, os testes de integração que na verdade vão testar coisas como os próprios requests.
+
+Não existe uma maneira óbvia de fazer testes de integração. Podemos, por exemplo, tanto
+
+- Rodar o servidor e fazer uma chamada de API para o servidor; ou
+- Podemos usar o Express juntamente com o Supertest, para que ele dê conta disso no nosso lugar.

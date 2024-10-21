@@ -26,16 +26,7 @@ app.use(express.urlencoded({ extended: true }));
 // haltMiddleware(app);
 
 app.get("/", (_req, res, next) => {
-  // console.log("Hello from Express!");
-  // res.status(200);
-  // res.json({ message: "Eu sou o payload desta API!" });
-
-  // throw new Error("Hello from error thrown!");
-
-  // Asynchronous timeout
-  setTimeout(() => {
-    next(new Error("I am an async error, bitch!"));
-  }, 1);
+  res.json({ message: "Hello, world!" });
 });
 
 app.use("/api", protect, router);
