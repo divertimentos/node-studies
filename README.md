@@ -27,6 +27,7 @@
   - [Testes unitários](#testes-unitários)
   - [Testes de integração (usando Supertest)](#testes-de-integração-usando-supertest)
 - [Deployment](#deployment)
+- [Wrapping up](#wrapping-up)
 <!--toc:end-->
 
 ![scott](https://github.com/divertimentos/node-studies/blob/main/media/scott-moss.png)
@@ -299,3 +300,7 @@ Adicionamos esses dois scripts no `package.json`, um para buildar e outro para r
 ```
 
 OBS.: sempre adicione a posta `dist/` no `.gitignore`.
+
+# Wrapping up
+
+A dica final do Scott é estudar e praticar. Ficar construindo APIs até enjoar e ficar com vontade de usar coisas como FireBase e SupaBase, de tanto ter feito na mão e repetidamente o processo aprendido aqui.
