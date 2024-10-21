@@ -8,3 +8,6 @@ yarn.lock
 
 # IDE Cache Files
 .idea/
+
+# built files
+dist/
