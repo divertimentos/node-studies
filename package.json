@@ -6,7 +6,9 @@
   "scripts": {
     "test": "jest",
     "test:watch": "jest --watch",
-    "start": "ts-node src/index.ts",
+    "dev": "ts-node src/index.ts",
+    "build": "tsc -p tsconfig.json",
+    "start": "node dist/index.js",
     "server": "nodemon src/index.ts",
     "migration": "npx prisma migrate dev",
     "studio": "npx prisma studio"

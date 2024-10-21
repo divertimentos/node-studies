@@ -25,8 +25,9 @@
   - [Gerenciamento de Performance com Async](#gerenciamento-de-performance-com-async)
   - [Blocking Code](#blocking-code)
   - [Testes unitários](#testes-unitários)
-  - [Testes de integração](#testes-de-integração)
-  <!--toc:end-->
+  - [Testes de integração (usando Supertest)](#testes-de-integração-usando-supertest)
+- [Deployment](#deployment)
+<!--toc:end-->
 
 ![scott](https://github.com/divertimentos/node-studies/blob/main/media/scott-moss.png)
 
@@ -277,3 +278,24 @@ Não existe uma maneira óbvia de fazer testes de integração. Podemos, por exe
 
 - Rodar o servidor e fazer uma chamada de API para o servidor; ou
 - Podemos usar o Express juntamente com o Supertest, para que ele dê conta disso no nosso lugar.
+
+Vou precisar estudar sobre testes como um todo porque os exemplos do Scott, ou não funcionaram, ou cobriram apenas uma parte muito limitada do conceito.
+
+# Deployment
+
+O seu computador rodando sua API é tecnicamente um servidor, e o seu app está rodando no `localhost`. Isso significa que os requests são feitos para a sua própria máquina. Um provedor de hospedagem é a empresa que aluga um servidor para você colocar seus arquivos lá, para que eles estejam sempre online.
+
+Então não é apenas hospedar a database, é a aplicação em si.
+
+E tem o processo de build também, que é quando você converte o TS em JS antes do deploy, para que essa versão seja enviada.
+
+Adicionamos esses dois scripts no `package.json`, um para buildar e outro para rodar o build. É por isso que rodamos o build.
+
+```json
+{
+  "build": "tsc -p tsconfig.json",
+  "start": "node dist/index.js"
+}
+```
+
+OBS.: sempre adicione a posta `dist/` no `.gitignore`.
